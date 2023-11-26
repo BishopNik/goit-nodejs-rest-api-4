@@ -3,6 +3,8 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
 
+const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
 const contactSchema = new Schema(
 	{
 		name: {
@@ -11,6 +13,7 @@ const contactSchema = new Schema(
 		},
 		email: {
 			type: String,
+			match: emailRegexp,
 			required: true,
 		},
 		phone: {
@@ -33,7 +36,7 @@ contactSchema.post('save', (err, _data, next) => {
 const contactAddSchema = Joi.object({
 	_id: Joi.string(),
 	name: Joi.string().required(),
-	email: Joi.string().email().required(),
+	email: Joi.string().pattern(emailRegexp).required(),
 	phone: Joi.string().required(),
 	favorite: Joi.boolean(),
 });
