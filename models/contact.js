@@ -2,6 +2,7 @@
 
 const { Schema, model } = require('mongoose');
 const Joi = require('joi');
+const handleMongooseError = require('../utils/handleMongooseError');
 
 const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -24,14 +25,15 @@ const contactSchema = new Schema(
 			type: Boolean,
 			default: false,
 		},
+		owner: {
+			type: Schema.Types.ObjectId,
+			ref: 'user',
+		},
 	},
 	{ versionKey: false, timestamps: true }
 );
 
-contactSchema.post('save', (err, _data, next) => {
-	err.status = 400;
-	next();
-});
+contactSchema.post('save', handleMongooseError);
 
 const contactAddSchema = Joi.object({
 	_id: Joi.string(),
