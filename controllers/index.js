@@ -6,9 +6,9 @@ const {
 	removeContact,
 	addContact,
 	updateContact,
-	updateContactFavorite,
 } = require('./contacts.js');
-const { register, login } = require('./auth.js');
+const { register, login, logout, getCurrent } = require('./auth.js');
+const { changeSubscription } = require('./users.js');
 
 module.exports = {
 	listContacts,
@@ -16,7 +16,9 @@ module.exports = {
 	removeContact,
 	addContact,
 	updateContact,
-	updateContactFavorite,
+	changeSubscription,
 	register,
 	login,
+	logout,
+	getCurrent,
 };

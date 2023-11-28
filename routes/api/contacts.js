@@ -1,33 +1,31 @@
 /** @format */
 
 const express = require('express');
-const { validateBody, isValidId } = require('../../middlewares');
-const { contactAddSchema, contactFavoriteSchema } = require('../../models');
+const { validateBody, isValidId, authenticate } = require('../../middlewares');
+const { contactAddSchema } = require('../../models');
 const {
 	listContacts,
 	getContactById,
 	removeContact,
 	addContact,
 	updateContact,
-	updateContactFavorite,
 } = require('../../controllers');
 const { ctrlWrapper } = require('../../utils');
 
 const router = express.Router();
 
-router.get('/', ctrlWrapper(listContacts));
+router.get('/', authenticate, ctrlWrapper(listContacts));
 
-router.get('/:contactId', isValidId, ctrlWrapper(getContactById));
+router.get('/:contactId', authenticate, isValidId, ctrlWrapper(getContactById));
 
-router.post('/', validateBody(contactAddSchema), ctrlWrapper(addContact));
+router.post('/', authenticate, validateBody(contactAddSchema), ctrlWrapper(addContact));
 
-router.put('/:contactId', isValidId, validateBody(contactAddSchema), ctrlWrapper(updateContact));
-
-router.patch(
-	'/:contactId/favorite',
+router.put(
+	'/:contactId',
+	authenticate,
 	isValidId,
-	validateBody(contactFavoriteSchema, 'missing field favorite'),
-	ctrlWrapper(updateContactFavorite)
+	validateBody(contactAddSchema),
+	ctrlWrapper(updateContact)
 );
 
 router.delete('/:contactId', isValidId, ctrlWrapper(removeContact));

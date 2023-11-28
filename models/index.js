@@ -1,13 +1,13 @@
 /** @format */
 
-const { Contact, contactAddSchema, contactFavoriteSchema } = require('./contact');
-const { User, registerSchema, loginSchema } = require('./user');
+const { Contact, contactAddSchema } = require('./contact');
+const { User, registerSchema, loginSchema, favoriteSchema } = require('./user');
 
 module.exports = {
 	Contact,
 	contactAddSchema,
-	contactFavoriteSchema,
 	User,
 	registerSchema,
 	loginSchema,
+	favoriteSchema,
 };
