@@ -9,7 +9,7 @@ const {
 	removeContact,
 	addContact,
 	updateContact,
-} = require('../../controllers');
+} = require('../../controllers/contacts');
 const { ctrlWrapper } = require('../../utils');
 
 const router = express.Router();

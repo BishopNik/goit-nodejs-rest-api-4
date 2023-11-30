@@ -1,6 +1,6 @@
 /** @format */
 
-const { User } = require('../models');
+const { User } = require('../../models');
 
 const changeSubscription = async ({ user, body }, res) => {
 	const { _id: id } = user;

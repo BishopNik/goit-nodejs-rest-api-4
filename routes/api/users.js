@@ -3,7 +3,7 @@
 const express = require('express');
 const { validateBody, authenticate } = require('../../middlewares');
 const { favoriteSchema } = require('../../models');
-const { changeSubscription } = require('../../controllers');
+const { changeSubscription } = require('../../controllers/users');
 const { ctrlWrapper } = require('../../utils');
 
 const usersRouter = express.Router();
